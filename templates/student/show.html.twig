@@ -24,11 +24,14 @@
                 <td>{{ student.email }}</td>
             </tr>
             <tr>
-                <th> Teacher id</th>
+                <th> Teacher</th>
                 <td>
-                    {{ student.teacher.id }}
+                    <a href="{{ path('teacher_show', {'id': student.teacher.id}) }}">{{ student.teacher.lastName }} {{ student.teacher.firstName }}</a>
                 </td>
 
+            </tr>
+            <tr>
+                <th colspan="2"> Address</th>
             </tr>
             <tr>
                 <th>street</th>

@@ -24,8 +24,23 @@
                 <td>{{ teacher.email }}</td>
             </tr>
             <tr>
-                <th>Address</th>
-                <td>{{ teacher.address }}</td>
+                <th colspan="2">Address</th>
+            </tr>
+            <tr>
+                <th>street</th>
+                <td>{{ teacher.address.street }}</td>
+            </tr>
+            <tr>
+                <th>postalCode</th>
+                <td>{{ teacher.address.postalCode }}</td>
+            </tr>
+            <tr>
+                <th>city</th>
+                <td>{{ teacher.address.city }}</td>
+            </tr>
+            <tr>
+                <th>country</th>
+                <td>{{ teacher.address.country }}</td>
             </tr>
         </tbody>
     </table>
