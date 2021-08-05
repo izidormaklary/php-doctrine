@@ -1,6 +1,6 @@
-index:
-    path: /
-    controller: App\Controller\DefaultController::index
-teacher:
-    path: /teacher
-    controller: App\Controller\TeacherController::index
+#index:
+#    path: /
+#    controller: App\Controller\DefaultController::index
+#teacher:
+#    path: /teacher
+#    controller: App\Controller\TeacherController::index
