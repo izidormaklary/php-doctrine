@@ -51,6 +51,10 @@ class Teacher
 
     }
 
+    public function __toString():string
+    {
+        return $this->firstName." ". $this->lastName;
+    }
 
 
     public function getId(): ?int

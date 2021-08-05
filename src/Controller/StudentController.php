@@ -33,7 +33,7 @@ class StudentController extends AbstractController
     {
         $student = new Student();
         $teachers =  $teacherRepository->findAll();
-        $form = $this->createForm(StudentType::class, $student, [ 'teachers'=>$teachers]);
+        $form = $this->createForm(StudentType::class, $student);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -65,7 +65,7 @@ class StudentController extends AbstractController
     public function edit(Request $request, Student $student, TeacherRepository $teacherRepository): Response
     {
         $teachers =  $teacherRepository->findAll();
-        $form = $this->createForm(StudentType::class, $student,[ 'teachers'=>$teachers]);
+        $form = $this->createForm(StudentType::class, $student);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

@@ -20,15 +20,15 @@ class StudentType extends AbstractType
             ->add('firstName')
             ->add('lastName')
             ->add('email')
-            ->add('teacher', ChoiceType::class, [
-                'choices'=>[
-                    $options['teachers']
-                ],
-                'choice_label'=> 'firstName',
-                'choice_value'=> 'id',
-                'placeholder' => false,
-
-            ])
+            ->add('teacher')
+//            ->add('teacher', ChoiceType::class, [
+//                'choices'=>[
+//                    $options['teachers']
+//                ],
+//                'choice_label'=> 'firstName',
+//                'choice_value'=> 'id',
+//                'placeholder' => false,
+//            ])
             ->add('address', AddressType::class);
     }
 
@@ -36,7 +36,7 @@ class StudentType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Student::class,
-            'teachers' => array(null),
+//            'teachers' => array(null),
         ]);
     }
 }
