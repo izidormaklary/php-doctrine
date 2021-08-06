@@ -2,36 +2,44 @@
 
 namespace App\Controller;
 
-use App\DataFixtures\UserFixtures;
 use App\Entity\User;
-use App\Form\UserReg;
-
+use App\Form\RegistrationFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class RegistrationController extends AbstractController
 {
     /**
-     * @Route("/registration", name="registration")
+     * @Route("/register", name="app_register")
      */
-    public function index(Request $request, UserFixtures $userFixtures): Response
+    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
     {
         $user = new User();
-
-        $form = $this->createForm(UserReg::class,$user);
+        $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()){
+        if ($form->isSubmitted() && $form->isValid()) {
+            // encode the plain password
+            $user->setPassword(
+                $passwordEncoder->encodePassword(
+                    $user,
+                    $form->get('plainPassword')->getData()
+                )
+            );
+
             $entityManager = $this->getDoctrine()->getManager();
-            $userFixtures->hashNrole($user);
             $entityManager->persist($user);
             $entityManager->flush();
-            return $this->redirectToRoute('app_login',[],Response::HTTP_SEE_OTHER);
+            // do anything else you need here, like send an email
+
+            return $this->redirectToRoute('student_index');
         }
-        return $this->renderForm('registration/_form.html.twig', [
-            'form'=>$form
+
+        return $this->render('registration/register.html.twig', [
+            'registrationForm' => $form->createView(),
         ]);
     }
 }
